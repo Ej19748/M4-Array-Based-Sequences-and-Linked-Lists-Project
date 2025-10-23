@@ -1,3 +1,4 @@
+from __future__ import annotations
 from stack import Stack
 
 
@@ -7,7 +8,7 @@ class Node:
     def __init__(self, data):
         """Initialize a node with data."""
         self.data = data
-        self.next = None
+        self.next: Node | None = None
 
 
 class SinglyLinkedList:
@@ -15,7 +16,7 @@ class SinglyLinkedList:
 
     def __init__(self):
         """Initialize an empty singly linked list."""
-        self.head = None
+        self.head: Node | None = None
 
     def build_list_forward(self, values):
         """Build a list by inserting values at the end (forward order).
@@ -94,10 +95,11 @@ class SinglyLinkedList:
             return
 
         current = self.head
-        while current.next.next is not None:
+        while current.next is not None and current.next.next is not None:
             current = current.next
 
-        current.next = None
+        if current.next is not None:
+            current.next = None
 
     def remove_all(self, data):
         """Remove all nodes with the given data.
